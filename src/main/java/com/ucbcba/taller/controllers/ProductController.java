@@ -36,10 +36,23 @@ public class ProductController {
      */
     @RequestMapping(value = "/product/new", method = RequestMethod.GET)
     public String newProduct(Model model) {
-        return "newProduct";
+        model.addAttribute("product", new Product());
+        return "productForm";
     }
 
 
+
+    /**
+     * List all products.
+     *
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/product", method = RequestMethod.POST)
+    public String save(Product product, Model model) {
+        productService.saveProduct(product);
+        return "redirect:/products";
+    }
 
     /* List all products.
      *
@@ -54,10 +67,16 @@ public class ProductController {
     }
 
 
+    @RequestMapping(value = "/product/editar/{id}", method = RequestMethod.GET)
+    public String editProduct(@PathVariable Integer id, Model model) {
+        model.addAttribute("product", productService.getProductById(id));
+        return "productForm";
+    }
+
     @RequestMapping(value = "/product/eliminar/{id}", method = RequestMethod.GET)
     public String deleteProduct(@PathVariable Integer id, Model model) {
-        //Falta borrar
-        return "product";
+        productService.deleteProduct(id);
+        return "redirect:/products";
     }
 
 

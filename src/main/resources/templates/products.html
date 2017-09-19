@@ -16,14 +16,19 @@
                 <th>Id</th>
                 <th>Name</th>
                 <th>Price</th>
+                <th>Category</th>
+
                 <th>Acciones</th>
             </tr>
             <tr th:each="product : ${products}">
                 <td th:text="${product.id}">Id</td>
                 <td th:text="${product.name}">descirption</td>
                 <td th:text="${product.price}">price</td>
+                <td th:text="${product.category}">category</td>
+
                 <td><a th:href="${ '/product/' + product.id}">Ver</a>
-                    <a th:href="${ '/product/eliminar' + product.id}">Ver</a>
+                    <a th:href="${ '/product/eliminar/' + product.id}">Eliminar</a>
+                    <a th:href="${ '/product/editar/' + product.id}">Editar</a>
                 </td>
             </tr>
         </table>
